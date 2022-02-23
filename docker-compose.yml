@@ -1,0 +1,19 @@
+services:
+  api-gateway:
+    image: 'api-gateway'
+    build:
+      context: .
+      dockerfile: Dockerfile
+    deploy:
+      replicas: 1
+    ports:
+      - "9000:8081"
+    networks:
+      - private-network
+    environment:
+      JAVA_OPTS: "-Xss256k"
+      JWT_PUBLIC_KEY: -----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAz6nSQ0mkeF3KTHvdXVmYk2Pxt0qNPpcTdRWYfPuhThorFdNUW2gzWyfFlo0/S9tCSVhd71M3dNN220S94QN+kcoqF2V5FDlOWpAsVb6Rjp5yoeyNB94VXwMegdmRA2eLhG89ncgHu7vsPjxoAgceLRbOHYYypSUKdYruCObBKDqS0JO8vzqg80bnm2xmGk5gEKjSha2DXx3hyAMSfnOG1GE/r8W35472kq1X04zm2iuoCCSwifiSi5GF4Lr1seLibprai9uctkhEO2TJeHol1sEiPXLSDu5XOIAhzUrHLjx3tzpeYdLSyGwhlq0DOluy6hDAl/JR/GzEgEuNBWTZ2wIDAQAB-----END PUBLIC KEY-----
+      IDENTITY_SERVICE_URI: localhost:9000
+networks:
+  private-network:
+    driver: bridge

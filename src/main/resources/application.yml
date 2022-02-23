@@ -1,0 +1,23 @@
+server:
+  port: ${SERVER_PORT:8081}
+
+logging:
+  level:
+    reactor:
+      netty: INFO
+    org:
+      springframework:
+        cloud:
+          gateway: TRACE
+spring:
+  cloud:
+    gateway:
+      httpclient:
+        wiretap: true
+      httpserver:
+        wiretap: true
+
+identityServiceUri: ${IDENTITY_SERVICE_URI}
+
+jwt:
+  publicKey: ${JWT_PUBLIC_KEY}

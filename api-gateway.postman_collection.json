@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "d29792fc-794e-4720-ac25-c3b2f4b4e34b",
+		"name": "Api-Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "registration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"user\",\n    \"email\": \"email@gmail.com\",\n    \"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUri}}/registration",
+					"host": [
+						"{{baseUri}}"
+					],
+					"path": [
+						"registration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"user\",\n    \"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUri}}/login",
+					"host": [
+						"{{baseUri}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user get info",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjQ1NjYyNjE2fQ.jLHg5Jdey-Uf7g2vTNvIutbYjOi1iIxnQnxFyMRdo2kZFN2_mxRrHoM7ZfeL2TFBDdIHv0-OQOGOhcirpRlpG5Z2Ao0JWUmU5c4hiyPNj3ulPALLbRQLTvFEcf4XfqWA2FZXhZcy3dgzR3MhsRf7sADUnI6G58ST2X1gxXXWxn_rKVrRFNUZ3JQSq_1-lXau66nFm-gNLzX7F61pudAEqR19aUMMZAJkGF4IMZ-28iHoEqegi72LBRQSErPbKc_rM_qU2mgu4XEAkWGSmOwiKkSWC9BG1sJRTGVMGfeC_WZegFJdTehDr0f6Oa0q8i9n_AN6ftj4NLfnTBApl4RTIg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUri}}/profile/user",
+					"host": [
+						"{{baseUri}}"
+					],
+					"path": [
+						"profile",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user get profile me",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjQ1NjYyNjE2fQ.jLHg5Jdey-Uf7g2vTNvIutbYjOi1iIxnQnxFyMRdo2kZFN2_mxRrHoM7ZfeL2TFBDdIHv0-OQOGOhcirpRlpG5Z2Ao0JWUmU5c4hiyPNj3ulPALLbRQLTvFEcf4XfqWA2FZXhZcy3dgzR3MhsRf7sADUnI6G58ST2X1gxXXWxn_rKVrRFNUZ3JQSq_1-lXau66nFm-gNLzX7F61pudAEqR19aUMMZAJkGF4IMZ-28iHoEqegi72LBRQSErPbKc_rM_qU2mgu4XEAkWGSmOwiKkSWC9BG1sJRTGVMGfeC_WZegFJdTehDr0f6Oa0q8i9n_AN6ftj4NLfnTBApl4RTIg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUri}}/me",
+					"host": [
+						"{{baseUri}}"
+					],
+					"path": [
+						"me"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUri",
+			"value": "http://localhost:9000",
+			"type": "string"
+		}
+	]
+}
