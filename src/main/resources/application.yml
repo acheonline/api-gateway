@@ -3,21 +3,39 @@ server:
 
 logging:
   level:
-    reactor:
-      netty: INFO
-    org:
-      springframework:
-        cloud:
-          gateway: TRACE
+    reactor.netty: DEBUG
+    org.springframework.cloud.gateway: TRACE
+    ru.achernyavskiy0n.apigateway: DEBUG
 spring:
   cloud:
     gateway:
+      routes:
+        - id: news-delivery
+          uri: ${NEWS_HOST:http://localhost:8083}
+          order: 10
+          predicates:
+            - Path=/api/v1/news/**
+            - Method=POST
+        - id: identity
+          uri: ${IDENTITY_HOST:http://localhost:8082}
+          order: 9
+          predicates:
+            - Path=/api/v1/identity/**
+            - Method=POST
+        - id: opeartions
+          uri: ${OPERATION_HOST:http://localhost:8084}
+          order: 8
+          predicates:
+            - Path=/api/v1/operations/**
+            - Method=POST
       httpclient:
         wiretap: true
       httpserver:
         wiretap: true
 
-identityServiceUri: ${IDENTITY_SERVICE_URI}
-
+api-gateway:
+  hosts:
+    news-delivery-host: ${NEWS_HOST:http://localhost:8083}
+    operation-manager-host: ${OPERATION_HOST:http://localhost:8084}
 jwt:
   publicKey: ${JWT_PUBLIC_KEY}

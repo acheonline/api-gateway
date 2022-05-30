@@ -25,16 +25,19 @@ public class JwtFilter implements GatewayFilter {
 
   @Override
   public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+    log.debug("Start security filtering....");
     String token = getToken(exchange.getRequest().getHeaders());
+    log.debug("Getting token from header AUTHORIZATION....");
 
     if (token == null) {
       exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
       return exchange.getResponse().setComplete();
     } else {
       try {
+        log.debug("Getting login from token....");
         String login = getLoginFromToken(token);
         exchange.mutate().request(request -> request.header("-X-Username", login)).build();
-
+        log.debug("Set login from token to header '-X-Username'");
         return chain.filter(exchange);
       } catch (JwtTokenServiceException e) {
         exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
@@ -44,7 +47,7 @@ public class JwtFilter implements GatewayFilter {
   }
 
   private String getToken(HttpHeaders httpHeaders) {
-    logger.info("Headers: " + httpHeaders.toString());
+    log.debug("Headers: " + httpHeaders.toString());
 
     return httpHeaders.entrySet().stream()
         .filter(entry -> entry.getKey().equalsIgnoreCase(HttpHeaders.AUTHORIZATION))
