@@ -7,12 +7,135 @@ services:
     deploy:
       replicas: 1
     ports:
-      - "8080:8080"
+      - "8089:8080"
     networks:
       - private-network
     environment:
       JAVA_OPTS: "-Xss256k"
       JWT_PUBLIC_KEY: -----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAz6nSQ0mkeF3KTHvdXVmYk2Pxt0qNPpcTdRWYfPuhThorFdNUW2gzWyfFlo0/S9tCSVhd71M3dNN220S94QN+kcoqF2V5FDlOWpAsVb6Rjp5yoeyNB94VXwMegdmRA2eLhG89ncgHu7vsPjxoAgceLRbOHYYypSUKdYruCObBKDqS0JO8vzqg80bnm2xmGk5gEKjSha2DXx3hyAMSfnOG1GE/r8W35472kq1X04zm2iuoCCSwifiSi5GF4Lr1seLibprai9uctkhEO2TJeHol1sEiPXLSDu5XOIAhzUrHLjx3tzpeYdLSyGwhlq0DOluy6hDAl/JR/GzEgEuNBWTZ2wIDAQAB-----END PUBLIC KEY-----
+      NEWS_HOST: "http://news-delivery:8080"
+      OPERATION_HOST: "http://operation-manager:8080"
+  identity-service:
+    image: achernyavskiy0n/identity:v3
+    container_name: identity-service
+    restart: always
+    ports:
+      - "8087:8080"
+    networks:
+      - private-network
+    environment:
+      JAVA_OPTS: "-Xss256k"
+      JWT_PRIVATE_KEY: -----BEGIN PRIVATE KEY-----MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDPqdJDSaR4XcpMe91dWZiTY/G3So0+lxN1FZh8+6FOGisV01RbaDNbJ8WWjT9L20JJWF3vUzd003bbRL3hA36RyioXZXkUOU5akCxVvpGOnnKh7I0H3hVfAx6B2ZEDZ4uEbz2dyAe7u+w+PGgCBx4tFs4dhjKlJQp1iu4I5sEoOpLQk7y/OqDzRuebbGYaTmAQqNKFrYNfHeHIAxJ+c4bUYT+vxbfnjvaSrVfTjObaK6gIJLCJ+JKLkYXguvWx4uJumtqL25y2SEQ7ZMl4eiXWwSI9ctIO7lc4gCHNSscuPHe3Ol5h0tLIbCGWrQM6W7LqEMCX8lH8bMSAS40FZNnbAgMBAAECggEARdscriHxv8PdL4ljV+mx17MBNuVPSkTL+NEA8No80uceo0Lp163fyMRCRXjSWBQz4jRltQJLX3NbQjuHnE/uneBh9GjgKBt27iQdpeJrWIyYhzvp3UGp8sI72vZzP6/vUOeS1KbbYx2+RNlRK411azmGsIvaMY+aSxwnIrttMriVsMgMwATHq9rC/0TTIz8SVQZsPsdgGVQ56p1ZKmwIhS8ttmk6Jz+tNaH7jjB9fkRQrS6QdIjyFy+Mf0WY5j6k4sYcnqF9m5FIzpryZ+kFtoG24K54jU8SHMV4MpQ+PWDlWX3IBhcgGni4h21wCvDELqwNGFSvUyQXh90IwR8rkQKBgQD8pHfPYwZHybpMbPKDIzCC/HiiHQi8c4Sz0IR3H9mFjLw3ht47ilr8GDYONgLRUhLOv++m45bL4Pbey5sSl8pgpFe5cv3qVHuIaBqplE16zVDtWC5rv9rqL58QXjp8Pfxic/D2imCwARfA1l7pUvU1gPDH5cyC9GVqxCsRNDNQ/wKBgQDSbFOxoHc8zFh7M5ZmsSPKZ89IenASOmTpJNA+DrhBUWb9XYTwaOMDf1RGYp6AeFpyMiE7UEwB+rtPPTtKJj9NK77l3ev6FgJIxiu2X7vThaXWn8PLCN+kitLAMfSrcHUwMsjRrPSbYuwFJ0IZtraNxFjB2/Qo0WmI1YEcvFDbJQKBgQCN4L731CB+yCa7LKO0SVrA9I+6WpvBWQ44/OynCVfazAIXHMJIpZYa5G3W5TYH3xN40AkBq+XPcPKyg5z+gAfC5gftuUonAnKtU+lFOmeYgxzjbRYEpKWHxl6JjqFBjH3jvECh82wA61wvizOZzGCwP0z4tXB4Sk95+dhFvQ7keQKBgAoSd1scRDjbyyxyhrN5rS3mFCzy92RX+TaTtYgS6kzuGZDtJgzf6GXldWI9HDsoB6RJs/+D02+Q0eB0HN9qv0LxYhzcp4v7+7YCDluXb4Urc4m3cgbI8POOVZIvkfeW1XUuKSCoN7ksXgHNJEPY1BorGNiGr8Q4aeXL2ndGqFQlAoGBAILSaafJ1jrYvIUJosWVoQjr0oIV7iXmYRJAB4B4XvoDUjNQBF6/tIhg4TrIyVzQN+w9h7J5taTNzcnWm89LOsgIjdMVE3L4c3v7eNkdVTqnxvo+fEKEggd6gpMq7Xor1f09nY/IQZo4LTz/XyElhJMlh/+Gls16oxTQoHldL3w6-----END PRIVATE KEY-----
+      JWT_PUBLIC_KEY: -----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAz6nSQ0mkeF3KTHvdXVmYk2Pxt0qNPpcTdRWYfPuhThorFdNUW2gzWyfFlo0/S9tCSVhd71M3dNN220S94QN+kcoqF2V5FDlOWpAsVb6Rjp5yoeyNB94VXwMegdmRA2eLhG89ncgHu7vsPjxoAgceLRbOHYYypSUKdYruCObBKDqS0JO8vzqg80bnm2xmGk5gEKjSha2DXx3hyAMSfnOG1GE/r8W35472kq1X04zm2iuoCCSwifiSi5GF4Lr1seLibprai9uctkhEO2TJeHol1sEiPXLSDu5XOIAhzUrHLjx3tzpeYdLSyGwhlq0DOluy6hDAl/JR/GzEgEuNBWTZ2wIDAQAB-----END PUBLIC KEY-----
+      DATASOURCE_URL: jdbc:postgresql://postgres:5432/news_db
+  operation-manager:
+    image: achernyavskiy0n/news-operation-manager:v1
+    container_name: operation-manager
+    restart: always
+    networks:
+      - private-network
+    ports:
+      - '8082:8080'
+    environment:
+      JAVA_OPTS: "-Xss256k"
+      NEWS_STORAGE_URL: "http://news-storage:8084"
+  news-storage:
+    image: achernyavskiy0n/news-storage:v1
+    container_name: news-storage
+    restart: always
+    networks:
+      - private-network
+    ports:
+      - '8084:8080'
+    environment:
+      JAVA_OPTS: "-Xss256k"
+      KAFKA_BOOTSTRAP_SERVERS: broker:19092
+      DATASOURCE_URL: jdbc:postgresql://postgres:5432/news_db
+  news-delivery:
+    image: achernyavskiy0n/news-delivery:v1
+    container_name: news-delivery
+    restart: always
+    networks:
+      - private-network
+    ports:
+      - '8081:8080'
+    environment:
+      JAVA_OPTS: "-Xss256k"
+      KAFKA_BOOTSTRAP_SERVERS: broker:19092
+  postgres:
+    image: "bitnami/postgresql"
+    container_name: postgres
+    restart: unless-stopped
+    networks:
+      - private-network
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "news_db"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d news_db" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+  # *----------------------------------------*
+  # PROVIDING KAFKA
+  # *----------------------------------------*
+  zookeeper:
+    container_name: zookeeper
+    image: confluentinc/cp-zookeeper:5.5.1
+    networks:
+      - private-network
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+  broker:
+    container_name: broker
+    image: confluentinc/cp-server:5.5.1
+    hostname: broker
+    networks:
+      - private-network
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+      - "19092:19092"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://broker:19092,LISTENER_DOCKER_EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_DOCKER_INTERNAL:PLAINTEXT,LISTENER_DOCKER_EXTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_DOCKER_INTERNAL
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_BROKER_ID: 1
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      CONFLUENT_METRICS_ENABLE: 'false'
+      KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 1
+  # *----------------------------------------*
+  # WEB INTERFACE FOR KAFKA
+  # *----------------------------------------*
+  kafdrop:
+    image: obsidiandynamics/kafdrop
+    container_name: kafdrop
+    networks:
+      - private-network
+    restart: "no"
+    ports:
+      - "9000:9000"
+    environment:
+      KAFKA_BROKERCONNECT: "broker:19092"
+      JVM_OPTS: "-Xms32M -Xmx128M -Xss256K -XX:-TieredCompilation -XX:+UseStringDeduplication -noverify"
+    depends_on:
+      - broker
 networks:
   private-network:
     driver: bridge
