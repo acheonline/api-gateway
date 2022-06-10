@@ -16,12 +16,6 @@ spring:
           predicates:
             - Path=/api/v1/news/**
             - Method=POST
-        - id: identity
-          uri: ${IDENTITY_HOST:http://localhost:8082}
-          order: 9
-          predicates:
-            - Path=/api/v1/identity/**
-            - Method=POST
         - id: opeartions
           uri: ${OPERATION_HOST:http://localhost:8084}
           order: 8
