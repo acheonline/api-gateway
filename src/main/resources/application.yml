@@ -33,3 +33,25 @@ api-gateway:
     operation-manager-host: ${OPERATION_HOST:http://localhost:8084}
 jwt:
   publicKey: ${JWT_PUBLIC_KEY}
+
+management:
+  endpoint:
+    health:
+      probes.enabled: true
+      livenessState.enabled: true
+      readinessState.enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+      base-path: /
+      path-mapping.health: health
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
