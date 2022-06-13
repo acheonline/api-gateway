@@ -2,7 +2,7 @@
 
 ### Realisation of Api Gateway Application
 
-Authentic serivce (BFF pattern realization)
+Authentic service (BFF pattern realization)
 
 | #   | Переменная конфигурации | Назначение                                             | Значение по умолчанию |
 |-----|-------------------------|:-------------------------------------------------------|:----------------------|
